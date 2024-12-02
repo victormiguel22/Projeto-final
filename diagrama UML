@@ -2,15 +2,12 @@
 Estacionamento "1" *-- "*" Vaga : contém
 Estacionamento "1" o-- "*" Veiculo : gerencia
 Estacionamento "1" *-- "*" Usuario : gerencia
-Pagamento "1" o-- "1" Veiculo
-Relatorio "1" --* "1" Estacionamento
 Estacionamento *-- Pagamento : gera
-Login *-- Usuario : autentica
 Vaga "1" o-- "0..1" Veiculo : pode conter
 Tarifa "1" --* "*" Estacionamento : define o preço de 
-Tarifa --> "1" Veiculo
-Pagamento -- Cliente
-
+Tarifa --> "1" Pagamento
+Relatorio "1" --* "1" Estacionamento
+Cliente "1" -- "*" Pagamento : realiza
 
 class Cliente extends Usuario {
 +realizarPagamento(veiculo: Veiculo): Pagamento
@@ -21,12 +18,10 @@ class Funcionario extends Usuario {
 +cadastrarVeiculo(placa: String, modelo: String, tipo: String): Veiculo
 +registrarEntrada(veiculo: Veiculo): void
 +registrarSaida(veiculo: Veiculo): void
-}
-
-class Admin extends Usuario {
 +modificarTarifa(novoValor: double): void
 +gerarRelatorio(): Relatorio
 +visualizarRegistros(): List<Registro>
+
 }
 
 class Estacionamento {
@@ -84,6 +79,7 @@ class Usuario {
 
 class Pagamento {
 
+- tipo: String
 -valor: double
 -data: LocalDateTime
 -veiculo: Veiculo
@@ -91,6 +87,17 @@ class Pagamento {
 
 +registrarPagamento(): void
 +emitirRecibo(): String
+
+}
+
+
+
+class Tarifa {
+
+-valorPorHora: double
+-fracaoMinimaHora: double
+
++calcularValor(tempoPermanencia: int): double
 
 }
 
@@ -103,35 +110,6 @@ class Relatorio {
 
 +relatorioFaturamento(estacionamento: Estacionamento): void
 +relatorioFluxo(estacionamento: Estacionamento): void
-
-}
-
-class Login {
-
--usuarios: List<Usuario>
-
-+verificarPermissoes(usuario: Usuario): String
-+realizarLogin(login: String, senha: String): Usuario
-
-}
-
-class Tarifa {
-
--valorPorHora: double
--fracaoMinimaHora: double
-
-+calcularValor(tempoPermanencia: int): double
-
-}
-
-class Registro {
-
--acoes: List<String>
--usuario: Usuario
--horario: LocalDateTime
-
-+adicionarRegistro(usuario: Usuario, acao: String): void
-+listarLogs(): List<String>
 
 }
 @enduml
