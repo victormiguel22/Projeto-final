@@ -1,0 +1,127 @@
+@startuml
+Estacionamento "1" *-- "*" Vaga : contém
+Estacionamento "1" *-- "*" Veiculo : gerencia
+Estacionamento "1" *-- "*" Usuario : gerencia
+Pagamento "1" o-- "1" Veiculo
+Relatorio "1" o-- "1" Estacionamento
+Registro "1" o-- "1" Usuario
+Veiculo ..> Tarifa
+Estacionamento ..> Pagamento : gera
+Estacionamento ..> Relatorio : gera
+Login ..> Usuario : autentica
+Vaga "1" o-- "0..1" Veiculo : pode conter
+Tarifa "1" -- "*" Estacionamento : define o preço de 
+
+
+
+Tarifa --> "1" Veiculo
+
+class Estacionamento {
+
+-nome: String
+-vagas: List<Vaga>
+-veiculos: List<Veiculo>
+-usuarios: List<Usuario>
+-faturamento: double
+-capacidade: int
+
++registrarEntrada(placa: String, modelo: String, tipo: String): void
++registrarSaida(placa: String): void
++calcularVagasDisponiveis(): int
++gerarRelatorio(): Relatorio
++registrarUsuario(usuario: Usuario): void
++mensagemEstacionamentoCheio(): void
+}
+
+class Veiculo {
+
+-placa: String
+-modelo: String
+-tipo: String
+-horaEntrada: LocalDateTime
+-horaSaida: LocalDateTime
+-tarifaCalculada: double
+
++calcularTempoPermanencia(): int
++calcularTarifa(tarifa: Tarifa): double
+
+}
+
+class Vaga {
+
+-numero: int
+-tipo: String
+-ocupada: boolean
+-veiculo: Veiculo 
+
++atribuirVeiculo(veiculo: Veiculo): void
++liberarVaga(): void
++estaDisponivel(): boolean
+
+}
+
+class Usuario {
+
+-nome: String
+-login: String
+-senha: String
+-perfil: String
+
++autenticar(login: String, senha: String): boolean
+
+}
+
+class Pagamento {
+
+-valor: double
+-data: LocalDateTime
+-veiculo: Veiculo
+-status: String
+
++registrarPagamento(): void
++emitirRecibo(): String
+
+}
+
+class Relatorio {
+
+-data: LocalDateTime
+-faturamentoTotal: double
+-veiculosRegistrados: List<Veiculo>
+-tempoTotalPermanencia: int
+
++relatorioFaturamento(estacionamento: Estacionamento): void
++relatorioFluxo(estacionamento: Estacionamento): void
+
+}
+
+class Login {
+
+-usuarios: List<Usuario>
+
++verificarPermissoes(usuario: Usuario): String
++realizarLogin(login: String, senha: String): Usuario
+
+}
+
+class Tarifa {
+
+-valorPorHora: double
+-fracaoMinimaHora: double
+
++calcularValor(tempoPermanencia: int): double
+
+}
+
+class Registro {
+
+-acoes: List<String>
+-usuario: Usuario
+-horario: LocalDateTime
+
++adicionarRegistro(usuario: Usuario, acao: String): void
++listarLogs(): List<String>
+
+}
+
+@enduml
