@@ -6,7 +6,6 @@ Estacionamento "1" *-- "*" Usuario : gerencia
 Pagamento "1" o-- "1" Veiculo
 Relatorio "1" o-- "1" Estacionamento
 Registro "1" o-- "1" Usuario
-Veiculo ..> Tarifa
 Estacionamento ..> Pagamento : gera
 Estacionamento ..> Relatorio : gera
 Login ..> Usuario : autentica
