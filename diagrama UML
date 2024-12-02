@@ -4,12 +4,30 @@ Estacionamento "1" o-- "*" Veiculo : gerencia
 Estacionamento "1" *-- "*" Usuario : gerencia
 Pagamento "1" o-- "1" Veiculo
 Relatorio "1" --* "1" Estacionamento
-Registro "1" o-- "1" Usuario
 Estacionamento *-- Pagamento : gera
 Login *-- Usuario : autentica
 Vaga "1" o-- "0..1" Veiculo : pode conter
 Tarifa "1" --* "*" Estacionamento : define o preço de 
 Tarifa --> "1" Veiculo
+Pagamento -- Cliente
+
+
+class Cliente extends Usuario {
++realizarPagamento(veiculo: Veiculo): Pagamento
++visualizarRecibo(pagamento: Pagamento): String
+}
+
+class Funcionario extends Usuario {
++cadastrarVeiculo(placa: String, modelo: String, tipo: String): Veiculo
++registrarEntrada(veiculo: Veiculo): void
++registrarSaida(veiculo: Veiculo): void
+}
+
+class Admin extends Usuario {
++modificarTarifa(novoValor: double): void
++gerarRelatorio(): Relatorio
++visualizarRegistros(): List<Registro>
+}
 
 class Estacionamento {
 
@@ -20,8 +38,6 @@ class Estacionamento {
 -faturamento: double
 -capacidade: int
 
-+registrarEntrada(placa: String, modelo: String, tipo: String): void
-+registrarSaida(placa: String): void
 +calcularVagasDisponiveis(): int
 +gerarRelatorio(): Relatorio
 +registrarUsuario(usuario: Usuario): void
