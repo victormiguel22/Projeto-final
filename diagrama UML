@@ -1,16 +1,14 @@
 @startuml
-
 Estacionamento "1" *-- "*" Vaga : contém
-Estacionamento "1" *-- "*" Veiculo : gerencia
+Estacionamento "1" o-- "*" Veiculo : gerencia
 Estacionamento "1" *-- "*" Usuario : gerencia
 Pagamento "1" o-- "1" Veiculo
-Relatorio "1" o-- "1" Estacionamento
+Relatorio "1" --* "1" Estacionamento
 Registro "1" o-- "1" Usuario
-Estacionamento ..> Pagamento : gera
-Estacionamento ..> Relatorio : gera
-Login ..> Usuario : autentica
+Estacionamento *-- Pagamento : gera
+Login *-- Usuario : autentica
 Vaga "1" o-- "0..1" Veiculo : pode conter
-Tarifa "1" -- "*" Estacionamento : define o preço de 
+Tarifa "1" --* "*" Estacionamento : define o preço de 
 Tarifa --> "1" Veiculo
 
 class Estacionamento {
@@ -120,5 +118,4 @@ class Registro {
 +listarLogs(): List<String>
 
 }
-
 @enduml
