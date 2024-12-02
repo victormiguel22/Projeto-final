@@ -1,4 +1,5 @@
 @startuml
+
 Estacionamento "1" *-- "*" Vaga : contém
 Estacionamento "1" *-- "*" Veiculo : gerencia
 Estacionamento "1" *-- "*" Usuario : gerencia
@@ -11,9 +12,6 @@ Estacionamento ..> Relatorio : gera
 Login ..> Usuario : autentica
 Vaga "1" o-- "0..1" Veiculo : pode conter
 Tarifa "1" -- "*" Estacionamento : define o preço de 
-
-
-
 Tarifa --> "1" Veiculo
 
 class Estacionamento {
