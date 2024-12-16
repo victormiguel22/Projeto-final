@@ -9,7 +9,7 @@ public class Main {
 	 public static void main(String[] args) {
 	        Estacionamento estacionamento = new Estacionamento("Estacionamento Catarinense", 5);
 	        Scanner scanner = new Scanner(System.in);
-	        
+ 
 	        while (true) {
 	            System.out.println("\n--- Sistema de Estacionamento ---");
 	            System.out.println("1. Login");
@@ -59,15 +59,15 @@ public class Main {
 	 private static void menuAdmin(Funcionario admin, Estacionamento estacionamento, Scanner scanner) {
 		    while (true) {
 		        System.out.println("\n--- Menu Admin ---");
-		        System.out.println("1. Modificar Tarifa");
-		        System.out.println("2. Gerar Relatório de Faturamento");
-		        System.out.println("3. Gerar Relatório de Fluxo");
+		        
+		        System.out.println("1. Cadastrar Funcionário");
+		        System.out.println("2. Cadastrar Cliente");
+		        System.out.println("3. Modificar Tarifa");
 		        System.out.println("4. Visualizar Recibos de Clientes");
 		        System.out.println("5. Ver Detalhes de Estadia de Veículo");
 		        System.out.println("6. Realizar Pagamento para Cliente");
-		        System.out.println("7. Cadastrar Veículo");
-		        System.out.println("8. Registrar Saída de Veículo");
-		        System.out.println("9. Voltar");
+		        System.out.println("7. Registrar Saída de Veículo");
+		        System.out.println("8. Voltar");
 		        System.out.print("Escolha uma opção: ");
 		        
 		        int opcao = scanner.nextInt();
@@ -75,44 +75,36 @@ public class Main {
 		        
 		        switch (opcao) {
 		            case 1:
-		                System.out.print("Digite o novo valor por hora: ");
-		                double novoValor = scanner.nextDouble();
-		                admin.modificarTarifa(estacionamento.getTarifa(), novoValor);
-		                break;
+	                    System.out.print("Nome do funcionário: ");
+	                    String nomeFuncionario = scanner.nextLine();
+	                    System.out.print("Login do funcionário: ");
+	                    String loginFuncionario = scanner.nextLine();
+	                    System.out.print("Senha do funcionário: ");
+	                    String senhaFuncionario = scanner.nextLine();
+	                    System.out.print("É admin? (true/false): ");
+	                    boolean isAdmin = scanner.nextBoolean();
+	                    scanner.nextLine(); // limpa o buffer
+	                    
+	                    estacionamento.registrarFuncionario(admin, nomeFuncionario, loginFuncionario, senhaFuncionario, isAdmin);
+	                    break;
+		               
 		            case 2:
-		                admin.gerarRelatorioFaturamento(estacionamento);
-		                break;
-		            case 3:
-		                admin.gerarRelatorioFluxo(estacionamento);
-		                break;
-		            case 4:
-		                admin.visualizarRecibos(estacionamento);
-		                break;
-		            case 5:
-		                System.out.print("Digite a placa do veículo: ");
-		                String placaDetalhes = scanner.nextLine();
-		                Veiculo veiculoDetalhes = estacionamento.encontrarVeiculoPorPlaca(placaDetalhes);
-		                if (veiculoDetalhes != null) {
-		                    admin.verDetalhesDaEstadia(veiculoDetalhes);
-		                }
-		                break;
-		            case 6:
-		                System.out.print("Digite a placa do veículo: ");
-		                String placaPagamento = scanner.nextLine();
-		                Veiculo veiculoPagamento = estacionamento.encontrarVeiculoPorPlaca(placaPagamento);
-		                if (veiculoPagamento != null) {
-		                    Pagamento pagamento = admin.realizarPagamento(veiculoPagamento, estacionamento.getTarifa());
-		                        admin.visualizarRecibo(pagamento);
-		                }
-		                break;
-		            case 7:
+		            	System.out.print("Nome do cliente: ");
+	                    String nomeCliente = scanner.nextLine();
+	                    System.out.print("Login do cliente: ");
+	                    String loginCliente = scanner.nextLine();
+	                    System.out.print("Senha do cliente: ");
+	                    String senhaCliente = scanner.nextLine();
+	                    
+	                    estacionamento.registrarCliente(admin, nomeCliente, loginCliente, senhaCliente);
+	                	
 	                    System.out.print("Placa do veículo: ");
 	                    String placa = scanner.nextLine();
 	                    System.out.print("Modelo do veículo: ");
 	                    String modelo = scanner.nextLine();
 	                    System.out.print("Tipo do veículo: ");
 	                    String tipo = scanner.nextLine();
-
+	                    
 	                    System.out.println("Vagas disponíveis:");
 	                    for (Vaga vaga : estacionamento.getVagas()) {
 	                        if (vaga.estaDisponivel()) {
@@ -130,30 +122,57 @@ public class Main {
 	                        estacionamento.adicionarVeiculo(novoVeiculo);
 	                        vaga.atribuirVeiculo(novoVeiculo);
 	                        System.out.println("Veículo cadastrado na vaga " + vaga.getNumero());
-	                    	Veiculo veiculoEntrada = estacionamento.encontrarVeiculoPorPlaca(placa);
-	                    	admin.registrarEntrada(veiculoEntrada);
+	                        Veiculo veiculoEntrada = estacionamento.encontrarVeiculoPorPlaca(placa);
+	                        admin.registrarEntrada(veiculoEntrada);
 	                    } else {
 	                        System.out.println("Vaga não disponível.");
 	                    }
 	                    break;
-	                case 8:
-	                    System.out.print("Placa do veículo para saída: ");
+
+		            case 3:
+	                    System.out.print("Digite o novo valor por hora: ");
+			                double novoValor = scanner.nextDouble();
+			                admin.modificarTarifa(estacionamento.getTarifa(), novoValor);
+			                break;
+
+		            case 4:
+		                admin.visualizarRecibos(estacionamento);
+		                break;
+		            case 5:
+		                System.out.print("Digite a placa do veículo: ");
+		                String placaDetalhes = scanner.nextLine();
+		                Veiculo veiculoDetalhes = estacionamento.encontrarVeiculoPorPlaca(placaDetalhes);
+		                if (veiculoDetalhes != null) {
+		                    admin.verDetalhesDaEstadia(veiculoDetalhes);
+		                }
+		                break;
+	                case 6:
+		                System.out.print("Digite a placa do veículo: ");
+			                String placaPagamento = scanner.nextLine();
+			                Veiculo veiculoPagamento = estacionamento.encontrarVeiculoPorPlaca(placaPagamento);
+			                if (veiculoPagamento != null) {
+			                    Pagamento pagamento = admin.realizarPagamento(veiculoPagamento, estacionamento.getTarifa());
+			                        admin.visualizarRecibo(pagamento);
+			                }
+		                break;
+	                    
+	                case 7:
+	                	System.out.print("Placa do veículo para saída: ");
 	                    String placaSaida = scanner.nextLine();
 	                    Veiculo veiculoSaida = estacionamento.encontrarVeiculoPorPlaca(placaSaida);
 	                    if (veiculoSaida != null) {
 	                        admin.registrarSaida(veiculoSaida, estacionamento);
 	                    }
-	                    break;
-		            case 9:
-		                return;
+	                	break;
+	                case 8:
+	                	return;
 		        }
 		    }
 	 }
-	    
 	    private static void menuFuncionario(Funcionario funcionario, Estacionamento estacionamento, Scanner scanner) {
 	        while (true) {
 	            System.out.println("\n--- Menu Funcionário ---");
-	            System.out.println("1. Cadastrar Veículo");
+	            System.out.println("1. Cadastrar Cliente");
 	            System.out.println("2. Registrar Saída de Veículo");
 	            System.out.println("3. Voltar");
 	            System.out.print("Escolha uma opção: ");
@@ -163,6 +182,16 @@ public class Main {
 	            
 	            switch (opcao) {
 	                case 1:
+	                	
+	                	System.out.print("Nome do cliente: ");
+	                    String nomeCliente = scanner.nextLine();
+	                    System.out.print("Login do cliente: ");
+	                    String loginCliente = scanner.nextLine();
+	                    System.out.print("Senha do cliente: ");
+	                    String senhaCliente = scanner.nextLine();
+	                    
+	                    estacionamento.registrarCliente(funcionario, nomeCliente, loginCliente, senhaCliente);
+	                	
 	                    System.out.print("Placa do veículo: ");
 	                    String placa = scanner.nextLine();
 	                    System.out.print("Modelo do veículo: ");
