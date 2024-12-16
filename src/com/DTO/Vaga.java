@@ -2,7 +2,6 @@ package com.DTO;
 
 public class Vaga {
     private int numero;
-    private String tipo;
     private boolean ocupada;
     private Veiculo veiculo;
     
