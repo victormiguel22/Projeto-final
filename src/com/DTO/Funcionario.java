@@ -68,18 +68,6 @@ public class Funcionario extends Usuario {
         }
     }
     
-    public Pagamento realizarPagamento(Veiculo veiculo, Tarifa tarifa) {
-        if (isAdmin) {
-            double valorPagamento = veiculo.calcularTarifa(tarifa);
-            Pagamento pagamento = new Pagamento(valorPagamento, veiculo);
-            pagamento.registrarPagamento();
-            return pagamento;
-        } else {
-            System.out.println("Acesso negado. Apenas administradores podem realizar pagamentos para outros.");
-            return null;
-        }
-    }
-    
     public void visualizarRecibos(Estacionamento estacionamento) {
         if (isAdmin) {
             System.out.println("--- Todos os Recibos ---");
