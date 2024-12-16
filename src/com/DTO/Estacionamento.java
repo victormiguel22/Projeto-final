@@ -122,13 +122,7 @@ public class Estacionamento {
         }
         return vagasDisponiveis;
     }
-    
-    public void mensagemEstacionamentoCheio() {
-        if (calcularVagasDisponiveis() == 0) {
-            System.out.println("Estacionamento está lotado!");
-        }
-    }
-    
+      
     // Getters
     public List<Vaga> getVagas() {
         return vagas;
