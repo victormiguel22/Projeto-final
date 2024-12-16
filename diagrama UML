@@ -18,7 +18,7 @@ class Funcionario extends Usuario {
 
 #isAdmin : boolean
 
-
++setAdmin (isAdmin : boolean) : void
 +cadastrarVeiculo(placa: String, modelo: String, tipo: String): Veiculo
 +registrarEntrada(veiculo: Veiculo): void
 +registrarSaida(veiculo: Veiculo): void
