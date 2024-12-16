@@ -1,11 +1,11 @@
 package com.DTO;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Cliente extends Usuario {
     private List<Pagamento> recibos = new ArrayList<>();
+    private List<Veiculo> veiculos = new ArrayList<>();
 
     public void verDetalhesDaEstadia(Veiculo veiculo) {
         System.out.println("Detalhes da Estadia:");
@@ -23,6 +23,14 @@ public class Cliente extends Usuario {
         return pagamento;
     }
     
+    public void adicionarVeiculo(Veiculo veiculo) {
+        veiculos.add(veiculo);
+    }
+
+    public List<Veiculo> getVeiculos() {
+        return veiculos;
+    }
+    
     public void visualizarRecibo(Pagamento pagamento) {
         System.out.println(pagamento.emitirRecibo());
     }
@@ -37,4 +45,7 @@ public class Cliente extends Usuario {
             System.out.println(pagamento.emitirRecibo());
         }
     }
+    
+    
+    
 }

@@ -3,7 +3,6 @@ package com.DTO;
 import java.time.LocalDateTime;
 
 public class Pagamento {
-    private String tipo = "Padrão";
     private double valor;
     private LocalDateTime data;
     private Veiculo veiculo;
@@ -38,9 +37,38 @@ public class Pagamento {
         );
     }
 
-    // Getters
-    public double getValor() { return valor; }
-    public LocalDateTime getData() { return data; }
-    public Veiculo getVeiculo() { return veiculo; }
-    public String getStatus() { return status; }
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	public LocalDateTime getData() {
+		return data;
+	}
+
+	public void setData(LocalDateTime data) {
+		this.data = data;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+ 
+
 }

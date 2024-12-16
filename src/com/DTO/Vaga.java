@@ -1,7 +1,5 @@
 package com.DTO;
 
-import java.time.LocalDateTime;
-
 public class Vaga {
     private int numero;
     private String tipo;
@@ -27,7 +25,38 @@ public class Vaga {
     public boolean estaDisponivel() {
         return !ocupada;
     }
+
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public boolean isOcupada() {
+		return ocupada;
+	}
+
+	public void setOcupada(boolean ocupada) {
+		this.ocupada = ocupada;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
     
-    public Veiculo getVeiculo() { return veiculo; }
-    public int getNumero() { return numero; }
+
 }

@@ -1,6 +1,4 @@
 package com.DTO;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class Estacionamento {
         this.capacidade = capacidade;
         this.tarifa = new Tarifa(10.0, 0.5); // Tarifa inicial: R$10 por hora
         inicializarVagas();
-        inicializarUsuarios();
+        inicializarAdmin();
     }
     
     private void inicializarVagas() {
@@ -27,25 +25,55 @@ public class Estacionamento {
         }
     }
     
-    private void inicializarUsuarios() {
+    private void inicializarAdmin() {
         Funcionario admin = new Funcionario();
         admin.nome = "Administrador";
         admin.login = "admin";
         admin.senha = "admin123";
         admin.setAdminStatus(true);
         usuarios.add(admin);
+    }
+    
+    public boolean registrarFuncionario(Funcionario admin, String nome, String login, String senha, boolean isAdmin) {
+        if (!admin.isAdmin()) {
+            System.out.println("Apenas administradores podem registrar funcionários.");
+            return false;
+        }
         
-        Funcionario funcionario = new Funcionario();
-        funcionario.nome = "Funcionário Padrão";
-        funcionario.login = "funcionario";
-        funcionario.senha = "func123";
-        usuarios.add(funcionario);
+        for (Usuario usuario : usuarios) {
+            if (usuario.login.equals(login)) {
+                System.out.println("Login já existe. Por favor, escolha outro.");
+                return false;
+            }
+        }
         
-        Cliente cliente = new Cliente();
-        cliente.nome = "Cliente Padrão";
-        cliente.login = "cliente";
-        cliente.senha = "cliente123";
-        usuarios.add(cliente);
+        Funcionario novoFuncionario = new Funcionario();
+        novoFuncionario.nome = nome;
+        novoFuncionario.login = login;
+        novoFuncionario.senha = senha;
+        novoFuncionario.setAdminStatus(isAdmin);
+        
+        usuarios.add(novoFuncionario);
+        System.out.println("Funcionário " + nome + " registrado.");
+        return true;
+    }
+    
+    public boolean registrarCliente(Usuario usuarioRegistrador, String nome, String login, String senha) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.login.equals(login)) {
+                System.out.println("Login já existe. Por favor, escolha outro.");
+                return false;
+            }
+        }
+        
+        Cliente novoCliente = new Cliente();
+        novoCliente.nome = nome;
+        novoCliente.login = login;
+        novoCliente.senha = senha;
+        
+        usuarios.add(novoCliente);
+        System.out.println("Cliente " + nome + " registrado com sucesso.");
+        return true;
     }
     
     public List<Veiculo> getVeiculos() {

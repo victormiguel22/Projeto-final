@@ -1,9 +1,14 @@
 package com.DTO;
 
+import java.time.temporal.ChronoUnit;
 import java.time.LocalDateTime;
 
 public class Veiculo {
-    private String placa;
+	
+    private static final LocalDateTime inicioPrograma = LocalDateTime.now();
+    private static final long inicioRealMillis = System.currentTimeMillis();
+	private static final int conversor = 120;
+	private String placa;
     private String modelo;
     private String tipo;
     private LocalDateTime horaEntrada;
@@ -16,11 +21,17 @@ public class Veiculo {
         this.tipo = tipo;
     }
     
+    
+    private static LocalDateTime getTempoLogico() {
+        long tempoRealDecorridoMillis = System.currentTimeMillis() - inicioRealMillis; // tempo real (ms)
+        long segundosLogicos = (tempoRealDecorridoMillis / 1000) * conversor; // tempo acelerado
+        return inicioPrograma.plus(segundosLogicos, ChronoUnit.SECONDS); // ajusta o tempo
+    }
+    
     public int calcularTempoPermanencia() {
-        if (horaEntrada == null)     	
-        return 0;
-  
-        LocalDateTime horarioFinal = horaSaida != null ? horaSaida : LocalDateTime.now();
+    	if (horaEntrada == null) return 0;
+
+        LocalDateTime horarioFinal = horaSaida != null ? horaSaida : getTempoLogico(); // usa o tempo acelerado
         return (int) java.time.Duration.between(horaEntrada, horarioFinal).toHours();
     }
     

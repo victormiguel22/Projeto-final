@@ -3,7 +3,8 @@ import java.time.LocalDateTime;
 
 
 public class Funcionario extends Usuario {
-    protected boolean isAdmin;
+
+	protected boolean isAdmin;
 
     public Funcionario() {
         this.isAdmin = false;
@@ -20,6 +21,8 @@ public class Funcionario extends Usuario {
     public Veiculo cadastrarVeiculo(String placa, String modelo, String tipo) {
         Veiculo veiculo = new Veiculo(placa, modelo, tipo);
         System.out.println("Veículo cadastrado: " + placa);
+        Cliente cliente = new Cliente();
+        cliente.adicionarVeiculo(veiculo);
         return veiculo;
     }
     
@@ -52,25 +55,7 @@ public class Funcionario extends Usuario {
             System.out.println("Acesso negado. Apenas administradores podem modificar tarifas.");
         }
     }
-    
-    public void gerarRelatorioFaturamento(Estacionamento estacionamento) {
-        if (isAdmin) {
-            Relatorio relatorio = new Relatorio();
-            relatorio.relatorioFaturamento(estacionamento);
-        } else {
-            System.out.println("Acesso negado. Apenas administradores podem gerar relatórios de faturamento.");
-        }
-    }
-    
-    public void gerarRelatorioFluxo(Estacionamento estacionamento) {
-        if (isAdmin) {
-            Relatorio relatorio = new Relatorio();
-            relatorio.relatorioFluxo(estacionamento);
-        } else {
-            System.out.println("Acesso negado. Apenas administradores podem gerar relatórios de fluxo.");
-        }
-    }
-
+   
     // Métodos de cliente para admin
     public void verDetalhesDaEstadia(Veiculo veiculo) {
         if (isAdmin) {
