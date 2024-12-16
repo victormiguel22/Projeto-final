@@ -5,9 +5,8 @@ public class Vaga {
     private boolean ocupada;
     private Veiculo veiculo;
     
-    public Vaga(int numero, String tipo) {
+    public Vaga(int numero) {
         this.numero = numero;
-        this.tipo = tipo;
         this.ocupada = false;
     }
     
@@ -31,14 +30,6 @@ public class Vaga {
 
 	public void setNumero(int numero) {
 		this.numero = numero;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 	public boolean isOcupada() {
