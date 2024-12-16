@@ -26,7 +26,7 @@ public class Estacionamento {
         admin.nome = "Administrador";
         admin.login = "admin";
         admin.senha = "admin123";
-        admin.setAdminStatus(true);
+        admin.setAdmin(true);
         usuarios.add(admin);
     }
     
@@ -47,7 +47,7 @@ public class Estacionamento {
         novoFuncionario.nome = nome;
         novoFuncionario.login = login;
         novoFuncionario.senha = senha;
-        novoFuncionario.setAdminStatus(isAdmin);
+        novoFuncionario.setAdmin(isAdmin);
         
         usuarios.add(novoFuncionario);
         if (isAdmin) {
