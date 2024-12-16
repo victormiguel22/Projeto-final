@@ -21,7 +21,7 @@ public class Estacionamento {
     
     private void inicializarVagas() {
         for (int i = 1; i <= capacidade; i++) {
-            vagas.add(new Vaga(i, "Padrão"));
+            vagas.add(new Vaga(i));
         }
     }
     
