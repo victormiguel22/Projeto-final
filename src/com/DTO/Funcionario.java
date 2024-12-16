@@ -10,7 +10,7 @@ public class Funcionario extends Usuario {
         this.isAdmin = false;
     }
 
-    public void setAdminStatus(boolean isAdmin) {
+    public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
 
