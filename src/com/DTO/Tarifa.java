@@ -1,12 +1,15 @@
 package com.DTO;
 
 public class Tarifa {
-    private double valorPorHora;
+    private double valorPorHora = 10;
     private double fracaoMinimaHora;
 
     public Tarifa(double valorPorHora, double fracaoMinimaHora) {
         this.valorPorHora = valorPorHora;
         this.fracaoMinimaHora = fracaoMinimaHora;
+    }
+    public Tarifa() {
+    	
     }
 
     public double calcularValor(int tempoPermanencia) {
