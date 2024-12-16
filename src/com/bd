@@ -1,0 +1,50 @@
+CREATE DATABASE projetofinal;
+USE projetofinal;
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    login VARCHAR(50) UNIQUE NOT NULL,
+    senha VARCHAR(100) NOT NULL,
+    tipo_usuario ENUM('CLIENTE', 'FUNCIONARIO', 'ADMIN') NOT NULL
+);
+
+CREATE TABLE veiculos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    placa VARCHAR(10) UNIQUE NOT NULL,
+    modelo VARCHAR(100) NOT NULL,
+    tipo VARCHAR(50) NOT NULL,
+    hora_entrada DATETIME,
+    hora_saida DATETIME,
+    usuario_id INT,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+);
+
+CREATE TABLE vagas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero INT NOT NULL UNIQUE,
+    tipo VARCHAR(50) NOT NULL,
+    ocupada BOOLEAN DEFAULT FALSE,
+    veiculo_id INT,
+    FOREIGN KEY (veiculo_id) REFERENCES veiculos(id)
+);
+
+CREATE TABLE pagamentos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    valor DECIMAL(10,2) NOT NULL,
+    data DATETIME NOT NULL,
+    status ENUM('PENDENTE', 'PAGO') DEFAULT 'PENDENTE',
+    veiculo_id INT NOT NULL,
+    FOREIGN KEY (veiculo_id) REFERENCES veiculos(id)
+);
+
+CREATE TABLE tarifas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    valor_por_hora DECIMAL(10,2) NOT NULL,
+    fracao_minima_hora DECIMAL(3,2) NOT NULL
+);
+
+-- Initial data
+INSERT INTO tarifas (valor_por_hora, fracao_minima_hora) VALUES (10.0, 0.5);
+INSERT INTO usuarios (nome, login, senha, tipo_usuario) 
+VALUES ('Administrador', 'admin', 'admin123', 'ADMIN');
