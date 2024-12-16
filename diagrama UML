@@ -6,20 +6,23 @@ Estacionamento *-- Pagamento : gera
 Vaga "1" o-- "0..1" Veiculo : pode conter
 Tarifa "1" --* "*" Estacionamento : define o preço de 
 Tarifa --> "1" Pagamento
-Relatorio "1" --* "1" Estacionamento
 Cliente "1" -- "*" Pagamento : realiza
 
 class Cliente extends Usuario {
+
 +realizarPagamento(veiculo: Veiculo): Pagamento
 +visualizarRecibo(pagamento: Pagamento): String
 }
 
 class Funcionario extends Usuario {
+
+#isAdmin : boolean
+
+
 +cadastrarVeiculo(placa: String, modelo: String, tipo: String): Veiculo
 +registrarEntrada(veiculo: Veiculo): void
 +registrarSaida(veiculo: Veiculo): void
 +modificarTarifa(novoValor: double): void
-+gerarRelatorio(): Relatorio
 +visualizarRegistros(): List<Registro>
 
 }
@@ -32,15 +35,26 @@ class Estacionamento {
 -usuarios: List<Usuario>
 -faturamento: double
 -capacidade: int
+- tarifa : Tarifa
 
 +calcularVagasDisponiveis(): int
-+gerarRelatorio(): Relatorio
-+registrarUsuario(usuario: Usuario): void
++registrarCliente(usuario: Usuario): void
++registrarFuncionario(admin : Funcionario, nome : String, login : Stirng, senha : String, isAdmin : boolean) : boolean
 +mensagemEstacionamentoCheio(): void
+-inicializarAdmin() : void
+-inciializarVagas() : void
++adicionnarVeiculo(veiculo : Veiculo): void
++encontrarVeiculoPorPlaca(placa : String): Veiculo
++encontrarVagaDisponivel() : Vaga
++encontrarVagaPorNumero(numero : int) : Vaga
++calcularVagasDisponiveis() : int
 }
 
 class Veiculo {
 
+- {static} inicioPrograma: LocalDateTime
+- {static} inicioRealMillis : long
+- {static} conversor : int
 -placa: String
 -modelo: String
 -tipo: String
@@ -50,13 +64,13 @@ class Veiculo {
 
 +calcularTempoPermanencia(): int
 +calcularTarifa(tarifa: Tarifa): double
++getTempoLogico()
 
 }
 
 class Vaga {
 
 -numero: int
--tipo: String
 -ocupada: boolean
 -veiculo: Veiculo 
 
@@ -66,12 +80,11 @@ class Vaga {
 
 }
 
-class Usuario {
+abstract class Usuario {
 
--nome: String
--login: String
--senha: String
--perfil: String
+#nome: String
+#login: String
+#senha: String
 
 +autenticar(login: String, senha: String): boolean
 
@@ -79,7 +92,6 @@ class Usuario {
 
 class Pagamento {
 
-- tipo: String
 -valor: double
 -data: LocalDateTime
 -veiculo: Veiculo
@@ -91,7 +103,6 @@ class Pagamento {
 }
 
 
-
 class Tarifa {
 
 -valorPorHora: double
@@ -101,15 +112,4 @@ class Tarifa {
 
 }
 
-class Relatorio {
-
--data: LocalDateTime
--faturamentoTotal: double
--veiculosRegistrados: List<Veiculo>
--tempoTotalPermanencia: int
-
-+relatorioFaturamento(estacionamento: Estacionamento): void
-+relatorioFluxo(estacionamento: Estacionamento): void
-
-}
 @enduml
