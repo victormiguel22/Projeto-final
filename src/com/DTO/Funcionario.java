@@ -34,7 +34,6 @@ public class Funcionario extends Usuario {
     public void registrarSaida(Veiculo veiculo, Estacionamento estacionamento) {
         veiculo.setHoraSaida(LocalDateTime.now());
         
-        // Find and free the vaga for this vehicle
         for (Vaga vaga : estacionamento.getVagas()) {
             if (vaga.getVeiculo() == veiculo) {
                 vaga.liberarVaga();
