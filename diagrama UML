@@ -29,7 +29,6 @@ class Funcionario extends Usuario {
 
 class Estacionamento {
 
--nome: String
 -vagas: List<Vaga>
 -veiculos: List<Veiculo>
 -usuarios: List<Usuario>
