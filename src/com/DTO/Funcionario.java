@@ -44,7 +44,7 @@ public class Funcionario extends Usuario {
         System.out.println("Saída registrada para o veículo: " + veiculo.getPlaca());
     }
 
-    // Métodos de admin, disponíveis apenas se isAdmin for true
+    // métodos de admin se isAdmin for true
     
     public void modificarTarifa(Tarifa tarifa, double novoValor) {
         if (isAdmin) {
