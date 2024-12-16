@@ -62,9 +62,8 @@ public class Main {
 		        System.out.println("3. Modificar Tarifa");
 		        System.out.println("4. Visualizar Recibos de Clientes");
 		        System.out.println("5. Ver Detalhes de Estadia de Veículo");
-		        System.out.println("6. Realizar Pagamento para Cliente");
-		        System.out.println("7. Registrar Saída de Veículo");
-		        System.out.println("8. Voltar");
+		        System.out.println("6. Registrar Saída de Veículo");
+		        System.out.println("7. Voltar");
 		        System.out.print("Escolha uma opção: ");
 		        
 		        int opcao = scanner.nextInt();
@@ -142,18 +141,8 @@ public class Main {
 		                if (veiculoDetalhes != null) {
 		                    admin.verDetalhesDaEstadia(veiculoDetalhes);
 		                }
-		                break;
+		                break;	                    
 	                case 6:
-		                System.out.print("Digite a placa do veículo: ");
-			                String placaPagamento = scanner.nextLine();
-			                Veiculo veiculoPagamento = estacionamento.encontrarVeiculoPorPlaca(placaPagamento);
-			                if (veiculoPagamento != null) {
-			                    Pagamento pagamento = admin.realizarPagamento(veiculoPagamento, estacionamento.getTarifa());
-			                        admin.visualizarRecibo(pagamento);
-			                }
-		                break;
-	                    
-	                case 7:
 	                	System.out.print("Placa do veículo para saída: ");
 	                    String placaSaida = scanner.nextLine();
 	                    Veiculo veiculoSaida = estacionamento.encontrarVeiculoPorPlaca(placaSaida);
@@ -161,7 +150,7 @@ public class Main {
 	                        admin.registrarSaida(veiculoSaida, estacionamento);
 	                    }
 	                	break;
-	                case 8:
+	                case 7:
 	                	return;
 		        }
 		    }
