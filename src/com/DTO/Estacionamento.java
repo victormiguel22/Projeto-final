@@ -3,17 +3,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Estacionamento {
-    private String nome;
     private List<Vaga> vagas = new ArrayList<>();
     private List<Veiculo> veiculos = new ArrayList<>();
     private List<Usuario> usuarios = new ArrayList<>();
     private int capacidade;
     private Tarifa tarifa;
     
-    public Estacionamento(String nome, int capacidade) {
-        this.nome = nome;
+    public Estacionamento(int capacidade) {
         this.capacidade = capacidade;
-        this.tarifa = new Tarifa(10.0, 0.5); // Tarifa inicial: R$10 por hora
+        this.tarifa = new Tarifa(10.0, 0.5); // tarifa inicial: R$10 por hora
         inicializarVagas();
         inicializarAdmin();
     }
@@ -53,7 +51,12 @@ public class Estacionamento {
         novoFuncionario.setAdminStatus(isAdmin);
         
         usuarios.add(novoFuncionario);
-        System.out.println("Funcionário " + nome + " registrado.");
+        if (isAdmin) {
+        System.out.println("Admin " + nome + " registrado.");
+        } else { 
+            System.out.println("Funcionario " + nome + " registrado.");
+
+        }
         return true;
     }
     
