@@ -44,7 +44,7 @@ public class Main {
 		    for (Usuario usuario : estacionamento.getUsuarios()) {
 		        if (usuario.autenticar(login, senha)) {
 		            if (usuario instanceof Funcionario && login.equals("admin")) {
-		                ((Funcionario) usuario).setAdminStatus(true);
+		                ((Funcionario) usuario).setAdmin(true);
 		            }
 		            return usuario;
 		        }
