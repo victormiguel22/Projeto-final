@@ -23,7 +23,6 @@ class Funcionario extends Usuario {
 +registrarEntrada(veiculo: Veiculo): void
 +registrarSaida(veiculo: Veiculo): void
 +modificarTarifa(novoValor: double): void
-+visualizarRegistros(): List<Registro>
 
 }
 
