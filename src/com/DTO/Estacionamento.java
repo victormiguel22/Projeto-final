@@ -7,7 +7,6 @@ public class Estacionamento {
     private List<Vaga> vagas = new ArrayList<>();
     private List<Veiculo> veiculos = new ArrayList<>();
     private List<Usuario> usuarios = new ArrayList<>();
-    private double faturamento;
     private int capacidade;
     private Tarifa tarifa;
     
