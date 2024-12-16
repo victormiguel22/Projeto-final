@@ -11,7 +11,6 @@ public class Estacionamento {
     
     public Estacionamento(int capacidade) {
         this.capacidade = capacidade;
-        this.tarifa = new Tarifa(10.0, 0.5); // tarifa inicial: R$10 por hora
         inicializarVagas();
         inicializarAdmin();
     }
